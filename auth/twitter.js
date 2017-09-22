@@ -8,16 +8,16 @@ var init = require('../auth/init');
 passport.use(new TwitterStrategy({
     consumerKey: config.twitter.consumerKey,
     consumerSecret: config.twitter.consumerSecret,
-    callbackURL: 'https://voting-app-thunghiem.c9users.io/polls'
+    callbackURL: 'https://voting-app-thunghiem.c9users.io/auth/twitter/callback'
   },
   function(token, tokenSecret, profile, done) {
     
     var searchQuery = {
-      name: profile.displayName
+      username: profile.displayName
     };
     
     var updates = {
-      name: profile.displayName,
+      username: profile.displayName,
       id: profile.id
     };
     
@@ -34,5 +34,7 @@ passport.use(new TwitterStrategy({
     });
   })
 );
+
+init();
 
 module.exports = passport;
