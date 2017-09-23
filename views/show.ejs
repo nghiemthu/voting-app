@@ -1,16 +1,17 @@
 <% include partials/header %>
     
-    <p><%= poll.title %></p>
-    <p><%= poll.description %></p>
-    <% poll.options.forEach(function(option){ %>
-        <a href='#'><%= option.description %></a>: <%= option.vote%><br/>
-        <form action='<%= poll.id%>/<%= option.id%>' method='POST'>
-            <button>Vote</button>
-        </form>
-    <% }) %>
-    <form action='<%= poll.id%>/options/new' method='POST'>
-        <input type='text' name='option[description]' placeholder='New option'>
-        <button>Add option</button>
+  <p><%= poll.title %></p>
+  <p><%= poll.description %></p>
+  <% poll.options.forEach(function(option){ %>
+    <a href='#'><%= option.description %></a>: <%= option.vote%><br/>
+    <form action='<%= poll.id%>/<%= option.id%>' method='POST'>
+      <button>Vote</button>
     </form>
+  <% }) %>
+  <%= poll.voters %>
+  <form action='<%= poll.id%>/options/new' method='POST'>
+    <input type='text' name='option[description]' placeholder='New option'>
+    <button>Add option</button>
+  </form>
      
 <% include partials/footer %>
