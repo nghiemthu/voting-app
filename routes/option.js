@@ -1,62 +1,43 @@
-var express = require("express");
-var router = express.Router();
-var Poll = require("../models/poll");
-var Option = require("../models/option");
+var express     = require("express");
+var router      = express.Router();
+var Poll        = require("../models/poll");
+var Option      = require("../models/option");
+var middleware  = require("../middleware");
 
-// Render all polls avaiable
-router.get('/polls', function(req, res){
-Poll.find({}, function(err, polls){
-    if (err)
-      console.log(err);
-    else {
-      res.render('polls', {polls: polls}); 
-    };
-  });
-});
-
-// Render create page
-router.get('/new', function(req, res){
-  res.render('new');
-});
-
-// Create new poll
-router.post('/polls', function(req, res){
-
-  var options = req.body.options.split(', ');
-
-  Poll.create({}, function(err, poll){
+// Create new option
+router.post('/polls/:id/options/new', function(req, res){
+  Option.create(req.body.option, function(err, option){
     if (err) console.log(err);
     else {
-      poll.title = req.body.title;
-      poll.description = req.body.description;
-      
-      options.map(function(opt, index){
-        Option.create({}, function(err, option){
-          if (err) console.log(err);
-          else {
-            option.description = opt;
-            option.save();
+      Poll.findById(req.params.id, function(err, poll) {
+        if(err) console.log(err);
+        else {
             poll.options.push(option);
-            
-            if (index == options.length-1) {
-                poll.save();
-                res.redirect('/polls');
-            };
-          };
-        });
-      });
-    };
-  });
+            poll.save();
+            res.redirect('/polls/' + req.params.id);
+        }
+      })
+    }
+  })
 });
 
-// Render item page
-router.get('/polls/:id', function(req, res){
-  Poll.findById(req.params.id).populate("options").exec(function(err, poll){
-    if(err) console.log(err);
+// vote for option with optionid
+router.post('/polls/:id/:optionid', middleware.isVoted, function(req, res){
+  Option.findById(req.params.optionid, function(err, option){
+    if(err) console.log (err);
     else {
-        res.render('show', {poll: poll});
-    };
-  });
+      Poll.findById(req.params.id, function(err, poll) {
+        if (err) console.log(err);
+        else {
+          if (req.user) poll.voters.push(req.user._id);
+          option.vote = option.vote+1;
+          option.save();
+          poll.save();
+          res.redirect('/polls/' + req.params.id);
+        }
+      });
+    }
+  })
 });
 
 module.exports = router;

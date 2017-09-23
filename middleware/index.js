@@ -1,6 +1,13 @@
 var Poll = require("../models/poll");
 
 module.exports = {
+  isLoggedIn: function(req, res, next) {
+    if (req.isAuthenticated()) {
+      return next();
+    }
+    
+    res.redirect("/login");
+  },
   isVoted: function(req, res, next) {
     if (req.isAuthenticated()) {
       Poll.findById(req.params.id, function(err, poll) {
