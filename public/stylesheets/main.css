@@ -1,0 +1,30 @@
+.hero {
+  background-image: url("https://newevolutiondesigns.com/images/freebies/black-white-background-3.jpg");
+  height: 240px;
+  background-size: cover;
+  background-position: 50% 80%; 
+  font-family: 'Prompt', sans-serif;
+}
+
+.title {
+  text-align: center;
+  color: white;
+  font-size: 2em;
+  padding-top: 90px;
+  font-weight: bold;
+}
+
+.navTab {
+  width: 100%;
+  height: 100px;
+  text-align: left;
+  box-shadow: 1px 0px 0px 0px rgba(0,0,0,0.3);
+}
+
+.navTab a{
+  display: block;
+}
+
+.pollList {
+  height: 400px;
+}

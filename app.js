@@ -1,4 +1,4 @@
-var express         = require("express"),
+var express         = require("express"), 
     app             = express(),
     cookieParser    = require("cookie-parser"),
     mongoose        = require("mongoose"),
@@ -14,13 +14,12 @@ var express         = require("express"),
 var pollRoutes      = require("./routes/poll"),
     authRoutes      = require("./routes/"),
     optionRoutes    = require("./routes/option");
-    
-    
+
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(require('body-parser').urlencoded({ extended: true }));
 
-mongoose.connect("mongodb://localhost/voting-app", { useMongoClient: true });
+mongoose.connect("mongodb://thunghiem01:1234@ds119675.mlab.com:19675/voting-app", { useMongoClient: true });
 mongoose.Promise = require('bluebird');
  
 
@@ -38,6 +37,14 @@ app.use("", pollRoutes);
 app.use("", optionRoutes);
 app.use("", authRoutes);
 
+app.get('/', (req, res) => {
+  res.render('index', {
+    content: '...'
+  });
+});
+
+
+app.use(express.static('public'));
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log('server started');
