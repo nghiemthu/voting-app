@@ -13,12 +13,18 @@ router.get('/auth/twitter/callback',
   passportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication
-    res.json(req.user);
+    res.redirect('/');
   });
   
+// logout route
+router.get("/logout", function(req, res){
+   req.logout();
+   res.redirect("/");
+});
   
 router.get('/user', function(req, res){
-    res.json(req.user || null);
+  console.log(req.user);
+  res.json(req.user || null);
 });
 
 module.exports = router;

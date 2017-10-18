@@ -9,13 +9,13 @@ class App extends React.Component {
   
   componentDidMount = () => {
     this.props.actions.fetchPolls();
+    this.props.actions.fetchUser();
   }
   
   render() {
-    console.log(this.props);
     return (
       <div className="App">
-        <Navigator />
+        <Navigator user={this.props.user}/>
         <Header />
       </div>
     );

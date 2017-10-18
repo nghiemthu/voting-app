@@ -7,9 +7,20 @@ export const fetchPolls = () => {
   return (dispatch) => {
   	axios.get('/polls')
 			.then(res => {
-			  console.log(res);
 				dispatch({ 
 				  type: types.GET_ALL_POLLS,
+		      payload: res.data
+				});
+			});
+	};
+};
+
+export const fetchUser = () => {
+  return (dispatch) => {
+  	axios.get('/user')
+			.then(res => {
+				dispatch({ 
+				  type: types.GET_USER,
 		      payload: res.data
 				});
 			});

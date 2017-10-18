@@ -10,9 +10,9 @@ var ids = {
     callbackURL: "http://127.0.0.1:3000/auth/linkedin/callback"
   },
   twitter: {
-    consumerKey: 'Ko7ES6n8nVqzq5nXWLslNhDEc',
-    consumerSecret: '365J7FfgDA5PiiDhtrlUZeDDmp8Eb2iau6nOu3eI9WH6PlAwth',
-    callbackURL: "https://voting-app-thunghiem.c9users.io/polls"
+    consumerKey: 'mM1LkAQ7NSBEPVSD8zzNmliY5',
+    consumerSecret: 'Z27apAMb3WgO9nhbZBnDGQy8N7qOyWYkGF7ic5rrliOr45eri9',
+    callbackURL: "https://voting-app-thunghiem.c9users.io"
   }
 };
 
