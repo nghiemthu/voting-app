@@ -1,8 +1,133 @@
-.title {
-  text-align: right;
-  color: white;
-  font-size: 2em;
-  padding-top: 90px;
-  font-weight: bold; }
+body {
+  font-family: "Montserrat", sans-serif; }
+
+select {
+  font-family: "Montserrat", sans-serif; }
+
+a {
+  color: #333; }
+
+a:focus, a:hover {
+  color: #199EB8;
+  text-decoration: none; }
+
+i {
+  padding: 0 2px; }
+
+.btn {
+  margin: 20px;
+  border-radius: 50px;
+  background-color: #199EB8;
+  border: none;
+  padding: 10px 30px;
+  font-weight: 800;
+  cursor: pointer;
+  color: white; }
+
+.line {
+  width: 80px;
+  height: 2px;
+  background: white;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  border-radius: 50px; }
+
+#mainNav {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  padding: 10px 0 15px; }
+  #mainNav .container {
+    min-width: 90%; }
+  #mainNav button {
+    margin-right: -20px; }
+  #mainNav .navbar-brand {
+    color: white;
+    font-weight: 800; }
+  #mainNav .navbar-toggler {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: white;
+    padding: 13px;
+    border-color: #444; }
+  #mainNav ul li a {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600; }
+  @media screen and (min-width: 992px) {
+    #mainNav {
+      color: #333;
+      background: transparent !important; } }
+
+.header {
+  background: no-repeat center center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://image.freepik.com/free-photo/crop-man-using-laptop-at-street_1220-1772.jpg");
+  background-size: cover;
+  text-align: center;
+  margin-bottom: 20px; }
+  .header h1 {
+    font-size: 40px;
+    text-transform: uppercase;
+    font-weight: 800; }
+  @media screen and (max-width: 992px) {
+    .header h1 {
+      font-size: 25px; } }
+
+.heading-content {
+  padding: 145px 0 100px;
+  color: white; }
+
+.custom-select {
+  outline: none;
+  border: none;
+  background: url("https://image.flaticon.com/icons/svg/118/118738.svg") right 0.65rem center no-repeat;
+  background-size: 12px;
+  margin-bottom: 0px;
+  color: #333;
+  cursor: pointer; }
+
+.post-title {
+  font-size: 30px;
+  font-weight: 800;
+  margin-top: 25px;
+  margin-bottom: 10px; }
+  @media screen and (max-width: 992px) {
+    .post-title {
+      font-size: 20px; } }
+
+.post-meta span {
+  color: #666; }
+.post-meta .vote {
+  font-weight: 600; }
+
+.btn-more {
+  margin-right: 0;
+  margin-top: 0; }
+
+.form-group {
+  color: #333; }
+  .form-group label {
+    font-size: 18px; }
+  .form-group input {
+    height: 38px;
+    font-family: "Montserrat", sans-serif; }
+
+.form-control {
+  border: 0 none;
+  border-radius: 0;
+  padding: 0;
+  border-bottom: 1px solid #e5e5e5; }
+
+.card {
+  padding: 10px;
+  border: none;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25); }
+  .card h4 {
+    font-size: 18px;
+    font-weight: 400; }
+
+footer {
+  text-align: center; }
 
 /*# sourceMappingURL=index.css.map */

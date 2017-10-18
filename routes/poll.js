@@ -6,11 +6,12 @@ var middleware  = require("../middleware");
 
 // Render all polls avaiable
 router.get('/polls', function(req, res){
-Poll.find({}, function(err, polls){
+  Poll.find({}).populate("author").populate("options")
+    .exec(function(err, polls){
     if (err)
       console.log(err);
     else {
-      res.render('polls', {polls: polls}); 
+      res.json(polls); 
     };
   });
 });
@@ -22,11 +23,13 @@ router.get('/new', middleware.isLoggedIn, function(req, res){
 
 // Get my polls
 router.get('/mypolls', middleware.isLoggedIn, function(req, res){
-  Poll.find({'author': req.user._id}, function(err, poll){
-    if (err) console.log(err);
-    else {
-      res.send('mypolls: ' + poll);
-    }
+  Poll.find({'author': req.user._id})
+    .populate("author").populate("options")
+    .exec(function(err, poll){
+      if (err) console.log(err);
+      else {
+        res.json(poll);
+      }
   }); 
 });
 
@@ -57,7 +60,7 @@ router.post('/polls', middleware.isLoggedIn, function(req, res){
             // If went through the array
             if (index == options.length-1) {
                 poll.save();
-                res.redirect('/polls');
+                res.json(poll);
             };
           };
         });

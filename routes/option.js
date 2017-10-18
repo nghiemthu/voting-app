@@ -14,7 +14,7 @@ router.post('/polls/:id/options/new', function(req, res){
         else {
             poll.options.push(option);
             poll.save();
-            res.redirect('/polls/' + req.params.id);
+            res.json(option);
         }
       })
     }
@@ -33,7 +33,7 @@ router.post('/polls/:id/:optionid', middleware.isVoted, function(req, res){
           option.vote = option.vote+1;
           option.save();
           poll.save();
-          res.redirect('/polls/' + req.params.id);
+          res.json(option);
         }
       });
     }

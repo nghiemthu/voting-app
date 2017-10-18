@@ -15,6 +15,10 @@ router.get('/auth/twitter/callback',
     // Successful authentication
     res.json(req.user);
   });
-
+  
+  
+router.get('/user', function(req, res){
+    res.json(req.user || null);
+});
 
 module.exports = router;
