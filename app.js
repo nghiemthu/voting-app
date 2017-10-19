@@ -17,7 +17,8 @@ var pollRoutes      = require("./routes/poll"),
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('body-parser').urlencoded({ extended: false }));
+app.use(require('body-parser').json());
 
 mongoose.connect("mongodb://thunghiem01:1234@ds119675.mlab.com:19675/voting-app", { useMongoClient: true });
 mongoose.Promise = require('bluebird');

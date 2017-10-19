@@ -5,29 +5,37 @@ import { connect } from 'react-redux';
 import * as Actions from '../actions/index';
 import Header from './Header';
 import Navigator from './Navigator';
-import PollList from './PollList';
+import VoteForm from './VoteForm';
 import Footer from './Footer';
 
-class App extends React.Component {
-  
+class PollView extends React.Component {
   componentDidMount = () => {
-    this.props.actions.fetchPolls();
-    this.props.actions.fetchUser();
+    const {id} = this.props.match.params;
+		this.props.actions.fetchPoll(id);
   }
   
   render() {
+    const { polls, user } = this.props;
     return (
-      <div className="App">
-        <Navigator user={this.props.user} />
-        <Header description={'A voting system for you and your friends'}/>
-        <PollList polls={this.props.polls.data} />
+      <div className="PollView">
+        <Navigator user={user} />
+        <Header 
+          title={polls.currentPoll.title}
+          description={polls.currentPoll.description}
+          button={'Share'}
+        />
+        <VoteForm 
+          options={polls.currentPoll.options} 
+          user={user} 
+          id={this.props.match.params.id}  
+        />
         <Footer />
       </div>
     );
   }
 }
 
-App.propTypes = {
+PollView.propTypes = {
   actions: PropTypes.object.isRequired
 };
 
@@ -36,6 +44,4 @@ export default connect(
   (state) => ({ ...state }),
   // map dispatch to props,
   (dispatch) => ({ actions: bindActionCreators(Actions, dispatch) })
-)(App);
-
-
+)(PollView);

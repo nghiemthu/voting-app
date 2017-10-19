@@ -46,6 +46,7 @@ router.post('/polls', middleware.isLoggedIn, function(req, res){
       poll.title        = req.body.title;
       poll.description  = req.body.description;
       poll.author       = req.user._id;
+      poll.date         = Date.now();
       
       // Map through options and add it to moogoose
       options.map(function(opt, index){
@@ -74,7 +75,7 @@ router.get('/polls/:id', function(req, res){
   Poll.findById(req.params.id).populate("options").exec(function(err, poll){
     if(err) console.log(err);
     else {
-        res.render('show', {poll: poll});
+        res.json(poll);
     };
   });
 });

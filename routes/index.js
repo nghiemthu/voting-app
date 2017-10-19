@@ -23,7 +23,6 @@ router.get("/logout", function(req, res){
 });
   
 router.get('/user', function(req, res){
-  console.log(req.user);
   res.json(req.user || null);
 });
 

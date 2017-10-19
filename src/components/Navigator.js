@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Navigator extends React.Component {
   
@@ -7,13 +8,14 @@ class Navigator extends React.Component {
       return (
         <ul className="navbar-nav ml-auto">
           <li className="nav-item active">
-            <a className="nav-link" href="#">Home</a>
+            <Link className="nav-link" to='/'>Home</Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">My Polls</a>
+            <Link className="nav-link" to='/header'>My Polls</Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/logout">{this.props.user.username} <i className="fa fa-sign-out"></i></a>
+            <a className="nav-link" href="/logout">{this.props.user.username} 
+            <i className="fa fa-sign-out"></i></a>
           </li>
         </ul>  
       );
@@ -22,10 +24,11 @@ class Navigator extends React.Component {
     return (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item active">
-          <a className="nav-link" href="#">Home</a>
+          <Link className="nav-link" to='/'>Home</Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/auth/twitter">Sign In</a>
+          <a className="nav-link" href="/auth/twitter">Sign In
+          <i className="fa fa-sign-in"></i></a>
         </li>
       </ul>  
     );
@@ -40,8 +43,7 @@ class Navigator extends React.Component {
             Home 
             <i className="fa fa-bars"></i>
           </button>
-          <a className="navbar-brand" href="#"><i className="fa fa-check-square-o" aria-hidden="true"></i> VotApp</a>
-      
+          <Link className="navbar-brand" to='/'><i className="fa fa-check-square-o" aria-hidden="true"></i> VotApp</Link>
           <div className="navbar-collapse collapse" id="navbarContainer" aria-expanded="false">
             {this.renderLogin()}
           </div>

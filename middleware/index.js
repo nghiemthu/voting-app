@@ -6,7 +6,7 @@ module.exports = {
       return next();
     }
     
-    res.redirect("/login");
+    res.json({ err: 'You have to log in!'});
   },
   isVoted: function(req, res, next) {
     if (req.isAuthenticated()) {
@@ -14,13 +14,13 @@ module.exports = {
         if (err) console.log(err);
         else if (poll.voters.indexOf(req.user._id) != -1) {
           console.log("Voted");
-          res.send("Already Voted");
+          res.json({ err: 'Already Voted!'});
         } else {
           next();
         }
       });
     } else {
-      res.redirect("/login");
+      res.json({ err: 'You have to log in!'});
     }
   }
 }

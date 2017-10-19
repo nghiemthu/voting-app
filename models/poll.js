@@ -4,6 +4,7 @@ var pollSchema = new mongoose.Schema({
   title: String,
   description: String,
   voters: { type: Array, default: []},
+  date: Date,
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user"

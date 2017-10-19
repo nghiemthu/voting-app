@@ -9,7 +9,7 @@ export const fetchPolls = () => {
 			.then(res => {
 				dispatch({ 
 				  type: types.GET_ALL_POLLS,
-		      payload: res.data
+		    		payload: res.data
 				});
 			});
 	};
@@ -23,6 +23,39 @@ export const fetchUser = () => {
 				  type: types.GET_USER,
 		      payload: res.data
 				});
-			});
+			})
+			.catch((error) => {
+		    console.log(error);
+		  });
+	};
+};
+
+export const fetchPoll = (id) => {
+  return (dispatch) => {
+  	axios.get(`/polls/${id}`)
+			.then(res => {
+				dispatch({ 
+				  type: types.GET_POLL,
+		      payload: res.data
+				});
+			})
+			.catch((error) => {
+		    console.log(error);
+		  });
+	};
+};
+
+export const voteOption = (id, value) => {
+  return (dispatch) => {
+  	console.log(value);
+  	axios.post(`../../api/polls/${id}/`, {
+			description: value
+	  })
+	  .then((response) => {
+	    console.log(response.data);
+	  })
+	  .catch((error) => {
+	    console.log(error);
+	  });
 	};
 };

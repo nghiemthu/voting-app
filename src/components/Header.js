@@ -8,11 +8,11 @@ class Header extends React.Component {
           <div className="row">
             <div className="col-lg-8 col-md-10 mx-auto">
               <div className="heading-content">
-                <h1>VotApp</h1>
+                <h1>{this.props.title || 'VotApp'}</h1>
                 <div className="line"></div>
-                <span className="subheading">A voting system for you and your friends</span>
+                <span className="subheading">{this.props.description || 'Share your thought!'}</span>
                 <br/>
-                <button type="button" className="btn">New Poll</button>
+                <button type="button" className="btn">{this.props.button || 'New Poll'}</button>
               </div>
             </div>
           </div>

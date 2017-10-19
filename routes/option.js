@@ -23,7 +23,11 @@ router.post('/polls/:id/options/new', function(req, res){
 
 // vote for option with optionid
 router.post('/polls/:id/:optionid', middleware.isVoted, function(req, res){
-  Option.findById(req.params.optionid, function(err, option){
+  Option.findOneAndUpdate(
+    {_id: req.params.optionid}, 
+    {description: req.body.description}, //new option
+    { upsert: true}, 
+    function(err, option){
     if(err) console.log (err);
     else {
       Poll.findById(req.params.id, function(err, poll) {
@@ -37,7 +41,35 @@ router.post('/polls/:id/:optionid', middleware.isVoted, function(req, res){
         }
       });
     }
-  })
+  });
+});
+
+
+// vote for option with optionid
+router.post('/api/polls/:id', middleware.isVoted, function(req, res){
+  Option.findOneAndUpdate(
+    {description: req.body.description}, //find with description
+    {description: req.body.description}, //new option
+    { upsert: true, 'new': true }, 
+    function(err, option){
+    if(err) console.log (err);
+    else {
+      Poll.findById(req.params.id, function(err, poll) {
+        if (err) console.log(err);
+        else {
+          if (req.user) poll.voters.push(req.user._id);
+          option.vote = option.vote+1;
+          option.save();
+          console.log(poll.options.indexOf(option._id));
+          if(poll.options.indexOf(option._id) <= -1){
+            poll.options.push(option._id);
+          }
+          poll.save();
+          res.json(option);
+        }
+      });
+    }
+  });
 });
 
 module.exports = router;
