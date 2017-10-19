@@ -127,6 +127,10 @@ i {
     font-size: 18px;
     font-weight: 400; }
 
+#pie-chart {
+  width: 584px;
+  height: 292px; }
+
 footer {
   text-align: center; }
 

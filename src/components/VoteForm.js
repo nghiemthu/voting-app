@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as Actions from '../actions/index';
+import Chart from './Chart';
 
 class VoteForm extends React.Component {
   
@@ -86,6 +87,7 @@ class VoteForm extends React.Component {
                 onClick={this.handleSubmit}
               >Submit &rarr;</button>
             </div>
+            <Chart />
           </div>
         </div>
       </div>
