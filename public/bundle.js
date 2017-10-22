@@ -33231,7 +33231,6 @@
 	      );
 	    }, _this.renderButton = function () {
 	      var shareLink = 'http://twitter.com/share?text=Vote For: ' + _this.props.polls.currentPoll.title + ' at&url=https://voting-app-thunghiem.c9users.io/';
-	      console.log(_this.props.polls.currentPoll.author, _this.props.user._id);
 	
 	      if (_this.props.button == 'Share') {
 	        return _react2.default.createElement(

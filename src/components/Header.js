@@ -32,8 +32,7 @@ class Header extends React.Component {
   
   renderButton = () => {
     const shareLink = `http://twitter.com/share?text=Vote For: ${this.props.polls.currentPoll.title} at&url=https://voting-app-thunghiem.c9users.io/`;
-    console.log(this.props.polls.currentPoll.author , this.props.user._id);
-    
+
     if (this.props.button == 'Share') {
       return (
         <div>
