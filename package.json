@@ -7,7 +7,7 @@
     "dev": "webpack -wd",
     "start": "node app.js",
     "build": "nodemon --exec babel-node app.js --ignore public/",
-    "webpack": "webpack",
+    "webpack": "webpack --config webpack.config.js --progress --colors",
     "postinstall": "npm run webpack"
   },
   "author": "",

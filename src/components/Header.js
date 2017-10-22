@@ -45,7 +45,7 @@ class Header extends React.Component {
     
     if (this.props.button == 'New Poll') {
       return (
-        <a className="btn btn-link" onClick={this.handleNewPoll}>New Poll!!</a>
+        <a className="btn btn-link" onClick={this.handleNewPoll}>New Poll</a>
       );
     }
     
