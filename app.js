@@ -43,9 +43,9 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.get('/*', (req, res) => {
-  res.redirect('/');
-});
+// app.get('/*', (req, res) => {
+//   res.redirect('/');
+// });
 
 
 app.listen(process.env.PORT, process.env.IP, function(){
