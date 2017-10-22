@@ -7,7 +7,9 @@
     "dev": "webpack -wd",
     "start": "node app.js",
     "build": "nodemon --exec babel-node app.js --ignore public/",
-    "webpack": "webpack"
+    "webpack": "webpack",
+    "prestart": "per-env",
+    "prestart:production": "npm run dev"
   },
   "author": "",
   "license": "ISC",
