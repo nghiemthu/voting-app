@@ -22,9 +22,6 @@ app.use(require('body-parser').json());
 
 mongoose.connect("mongodb://thunghiem01:1234@ds119675.mlab.com:19675/voting-app", { useMongoClient: true });
 mongoose.Promise = require('bluebird');
- 
-
-app.use(express.static('public'));
 
 //http://mherman.org/blog/2015/09/26/social-authentication-in-node-dot-js-with-passport/#.WbYoSMgjGUk
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
@@ -42,6 +39,8 @@ app.use("", authRoutes);
 app.get('/', (req, res) => {
   res.render('index');
 });
+
+app.use(express.static('public'));
 
 // app.get('/*', (req, res) => {
 //   res.redirect('/');
