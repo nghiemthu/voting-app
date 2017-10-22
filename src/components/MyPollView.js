@@ -16,6 +16,7 @@ class MyPollView extends React.Component {
   }
   
   render() {
+    console.log(this.props.polls.myPolls);
     return (
       <div className="App">
         <Navigator user={this.props.user} />
@@ -24,7 +25,7 @@ class MyPollView extends React.Component {
           description={'A voting system for you and your friends!'}
           button={'New Poll'}    
         />
-        <PollList polls={this.props.polls.myPolls}/>
+        <PollList displayedPolls={this.props.polls.myPolls}/>
         <Footer />
       </div>
     );

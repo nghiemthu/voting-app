@@ -38,12 +38,15 @@ app.use("", optionRoutes);
 app.use("", authRoutes);
 
 app.get('/', (req, res) => {
-  res.render('index', {
-    content: '...'
-  });
+  res.render('index');
 });
 
 app.use(express.static('public'));
+
+app.get('/*', (req, res) => {
+  res.redirect('/');
+});
+
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log('server started');

@@ -1,8 +1,0 @@
-<% include partials/header %>
-    
-  <% polls.forEach(function(poll){ %>
-    <a href='/polls/<%= poll._id %>'><%= poll.title %></a><br/>
-    <%= poll.voters %>
-  <% }) %>
-    
-<% include partials/footer %>

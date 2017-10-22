@@ -29,7 +29,7 @@ class VoteForm extends React.Component {
     const { value, newValue } = this.state;
     const id = this.props.polls.currentPoll._id;
     
-    if (!value) { alert('No selection'); return }
+    if (!value) { this.props.actions.handleError({type: 'error', message: 'You have to select a option first!'}); return }
     if (value !== 'New Option') { 
       this.props.actions.voteOption(id, value, chosenOption[0].description);
       return; 

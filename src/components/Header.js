@@ -21,10 +21,25 @@ class Header extends React.Component {
     this.context.router.history.push('/new');
   }
   
+  handleDetete = () => {
+    this.props.actions.deletePoll(this.props.polls.currentPoll._id, () => this.context.router.history.push('/'));
+  }
+  
+  renderDeleteButton = () => {
+    if (this.props.polls.currentPoll.author == this.props.user._id) 
+        return <a className="trash" onClick={this.handleDetete} >Delete</a>;
+  }
+  
   renderButton = () => {
+    const shareLink = `http://twitter.com/share?text=Vote For: ${this.props.polls.currentPoll.title} at&url=https://voting-app-thunghiem.c9users.io/`;
+    console.log(this.props.polls.currentPoll.author , this.props.user._id);
+    
     if (this.props.button == 'Share') {
       return (
-        <Link className="btn btn-link" to='/share'>Share</Link>
+        <div>
+          <a className="btn btn-link" href={shareLink}>Share</a>
+          {this.renderDeleteButton()}
+        </div>
       );
     }
     
@@ -50,6 +65,7 @@ class Header extends React.Component {
                 <span className="subheading">{this.props.description || 'Share your thought!'}</span>
                 <br/>
                 {this.renderButton()}
+                
               </div>
             </div>
           </div>

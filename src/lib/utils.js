@@ -36,4 +36,28 @@ export const makeKey = () => {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
 
   return text;
-}
+};
+
+export const sortBy = (array, key) => {
+  
+  if (key == 'date') {
+    return array.sort((a,b) => new Date(b.date) - new Date(a.date));
+  }
+  
+  if (key == 'vote') {
+    return array.sort((a,b) => {
+      const aVote = a.options.reduce(function(sum, item) {
+        return sum + item.vote;
+      }, 0);   
+      
+      const bVote = b.options.reduce(function(sum, item) {
+        return sum + item.vote;
+      }, 0);
+      
+      return bVote - aVote;
+    });
+  }
+  
+  return array;
+  
+};

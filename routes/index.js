@@ -4,7 +4,7 @@ var router = express.Router();
 var passportTwitter = require("../auth/twitter");
 
 router.get('/login', function(req, res){
-    res.send('Login Page');
+    res.redirect('/');
 });
 
 router.get('/auth/twitter', passportTwitter.authenticate('twitter'));
@@ -22,7 +22,7 @@ router.get("/logout", function(req, res){
    res.redirect("/");
 });
   
-router.get('/user', function(req, res){
+router.get('/api/user', function(req, res){
   res.json(req.user || null);
 });
 

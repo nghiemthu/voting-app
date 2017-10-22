@@ -15,7 +15,7 @@ i {
   padding: 0 2px; }
 
 .btn {
-  margin: 20px;
+  margin: 20px 10px;
   border-radius: 50px;
   background-color: #199EB8;
   border: none;
@@ -24,9 +24,20 @@ i {
   cursor: pointer;
   color: white; }
 
+.btn:hover {
+  background-color: #1970b8 !important; }
+
+.trash {
+  margin: 0px 10px;
+  cursor: pointer;
+  color: #f1f1f1 !important; }
+
+.trash:hover {
+  color: #ef5350 !important; }
+
 .btn-link:hover {
   color: white;
-  background-color: #199EB8;
+  background-color: #1970b8 !important;
   text-decoration: none; }
 
 .line {
@@ -108,7 +119,8 @@ i {
 
 .btn-more {
   margin-right: 0;
-  margin-top: 0; }
+  margin-top: 0;
+  margin-left: 0; }
 
 .form-group {
   color: #333; }

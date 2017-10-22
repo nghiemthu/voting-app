@@ -1,5 +1,6 @@
 import React from 'react';
 import {Pie} from 'react-chartjs-2';
+
 import { getRandomColor } from '../lib/utils';
 
 import { bindActionCreators } from 'redux';

@@ -6,24 +6,36 @@ var Option      = require("../models/option");
 var middleware  = require("../middleware");
 
 // Render all polls avaiable
-router.get('/polls', function(req, res){
+router.get('/api/polls', function(req, res){
   Poll.find({}).populate("author").populate("options")
     .exec(function(err, polls){
     if (err)
       console.log(err);
     else {
       res.json(polls); 
-    };
+    }
+  });
+});
+
+// Render all polls avaiable
+router.get('/api/polls/page/:number', function(req, res){
+  Poll.find({}).skip(req.params.number * 5).limit(5).populate("author").populate("options")
+    .exec(function(err, polls){
+    if (err)
+      console.log(err);
+    else {
+      res.json(polls); 
+    }
   });
 });
 
 // Render create page
-router.get('/new', middleware.isLoggedIn, function(req, res){
-  res.render('new');
-});
+// router.get('/new', middleware.isLoggedIn, function(req, res){
+//   res.render('new');
+// });
 
 // Get my polls
-router.get('/mypolls', middleware.isLoggedIn, function(req, res){
+router.get('/api/mypolls', middleware.isLoggedIn, function(req, res){
   Poll.find({'author': req.user._id})
     .populate("author").populate("options")
     .exec(function(err, poll){
@@ -77,13 +89,25 @@ router.post('/polls', middleware.isLoggedIn, function(req, res){
 });
 
 // Render item page
-router.get('/polls/:id', function(req, res){
+router.get('/api/polls/:id', function(req, res){
   Poll.findById(req.params.id).populate("options").exec(function(err, poll){
     if(err) console.log(err);
     else {
         res.json(poll);
-    };
+    }
   });
+});
+
+
+router.delete("/polls/:id", middleware.checkUserPoll, function(req, res){
+    Poll.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            console.log(err);
+        } else {
+          //res.redirect('/');
+          res.json({success: "You have deleted your poll successfully!"});
+        }
+    });
 });
 
 module.exports = router;

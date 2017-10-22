@@ -1,9 +1,16 @@
 import React, {PropTypes} from 'react';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect }            from 'react-redux';
 
+import * as Actions   from '../actions/index';
 import { formatDate } from '../lib/utils';
 
 class PollList extends React.Component {
+  
+  state = {
+    sortValue: 'date'
+  }
   
   renderPost = () => ({ title, _id, date, options }) => {
     const vote = options.reduce(function(sum, item) {
@@ -31,6 +38,13 @@ class PollList extends React.Component {
     );
   }
   
+  handleChange = (event) => {
+    event.preventDefault();
+    this.setState({sortValue: event.target.value});
+    this.props.actions.sortBy({type: event.target.value});
+    this.props.actions.fetchPollsPage();
+  }
+  
   renderList = (polls) => {
     
     if (!polls) {
@@ -40,9 +54,6 @@ class PollList extends React.Component {
     return (
       <div>
         {polls.map((this.renderPost()))}
-        <div className="clearfix">
-          <button type="button" className="btn float-right btn-more" href="#">More Polls &rarr;</button>
-        </div>
       </div>
     );
   }
@@ -53,13 +64,14 @@ class PollList extends React.Component {
         <div className="row">
           <div className="col-lg-8 col-md-10 mx-auto">
             <div className="clearfix">
-              <select className="custom-select float-right">
-                <option defaultValue="1">Sort by</option>
-                <option value="1">Date</option>
-                <option value="2">Votes</option>
+              <select className="custom-select float-right" 
+                value={this.state.sortValue} onChange={this.handleChange}>
+                <option defaultValue="date" disabled>Sort by</option>
+                <option value="date">Date</option>
+                <option value="vote">Votes</option>
               </select>
             </div>
-            {this.renderList(this.props.polls)}
+            {this.renderList(this.props.displayedPolls)}
           </div>
         </div>
       </div>
@@ -67,4 +79,10 @@ class PollList extends React.Component {
   }
 }
 
-export default PollList;
+export default connect(
+  // map state to props
+  (state) => ({ ...state }),
+  // map dispatch to props,
+  (dispatch) => ({ actions: bindActionCreators(Actions, dispatch) })
+)(PollList);
+

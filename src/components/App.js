@@ -1,18 +1,20 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes }   from 'react';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect }            from 'react-redux';
 
-import * as Actions from '../actions/index';
-import Header from './Header';
-import Navigator from './Navigator';
-import PollList from './PollList';
-import Footer from './Footer';
+import * as Actions   from '../actions/index';
+import Header         from './Header';
+import Navigator      from './Navigator';
+import PollList       from './PollList';
+import Footer         from './Footer';
+import PageButtons    from './PageButtons';
 
 class App extends React.Component {
   
   componentDidMount = () => {
     this.props.actions.fetchPolls();
     this.props.actions.fetchUser();
+    this.props.actions.fetchPollsPage();
   }
   
   render() {
@@ -23,7 +25,8 @@ class App extends React.Component {
           description={'A voting system for you and your friends!'}
           button={'New Poll'}    
         />
-        <PollList polls={this.props.polls.data} />
+        <PollList displayedPolls={this.props.polls.displayedPoll} />
+        <PageButtons />
         <Footer />
       </div>
     );
