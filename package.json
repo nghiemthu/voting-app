@@ -8,7 +8,7 @@
     "start": "node app.js",
     "build": "nodemon --exec babel-node app.js --ignore public/",
     "webpack": "webpack",
-    "prestart:production": "npm run webpack"
+    "postinstall": "npm run webpack"
   },
   "author": "",
   "license": "ISC",
