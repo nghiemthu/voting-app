@@ -33279,7 +33279,7 @@
 	                _react2.default.createElement(
 	                  'h1',
 	                  null,
-	                  this.props.title || 'VotApp!'
+	                  this.props.title || 'VotApp'
 	                ),
 	                _react2.default.createElement('div', { className: 'line' }),
 	                _react2.default.createElement(

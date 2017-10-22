@@ -42,9 +42,9 @@ app.get('/', (req, res) => {
 
 app.use(express.static('public'));
 
-// app.get('/*', (req, res) => {
-//   res.redirect('/');
-// });
+app.get('*', (req, res) => {
+  res.redirect('/');
+});
 
 
 app.listen(process.env.PORT, process.env.IP, function(){
