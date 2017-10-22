@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "dev": "webpack -wd",
-    "start": "nodemon --exec babel-node app.js --ignore public/",
+    "start": "node app.js"
+    "build": "nodemon --exec babel-node app.js --ignore public/",
     "webpack": "webpack"
   },
   "author": "",
