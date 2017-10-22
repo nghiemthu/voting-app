@@ -8,10 +8,10 @@ import Navigator from './Navigator';
 import PollList from './PollList';
 import Footer from './Footer';
 
-class App extends React.Component {
+class MyPollView extends React.Component {
   
   componentDidMount = () => {
-    this.props.actions.fetchPolls();
+    this.props.actions.fetchMyPoll();
     this.props.actions.fetchUser();
   }
   
@@ -20,17 +20,18 @@ class App extends React.Component {
       <div className="App">
         <Navigator user={this.props.user} />
         <Header 
+          title={'My Polls'}
           description={'A voting system for you and your friends!'}
           button={'New Poll'}    
         />
-        <PollList polls={this.props.polls.data} />
+        <PollList polls={this.props.polls.myPolls}/>
         <Footer />
       </div>
     );
   }
 }
 
-App.propTypes = {
+MyPollView.propTypes = {
   actions: PropTypes.object.isRequired
 };
 
@@ -39,6 +40,6 @@ export default connect(
   (state) => ({ ...state }),
   // map dispatch to props,
   (dispatch) => ({ actions: bindActionCreators(Actions, dispatch) })
-)(App);
+)(MyPollView);
 
 

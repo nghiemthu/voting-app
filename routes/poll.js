@@ -1,5 +1,6 @@
 var express     = require("express");
 var router      = express.Router();
+var mongoose    = require('mongoose');
 var Poll        = require("../models/poll");
 var Option      = require("../models/option");
 var middleware  = require("../middleware");
@@ -43,11 +44,13 @@ router.post('/polls', middleware.isLoggedIn, function(req, res){
     else {
       
       // Update the poll
+      if (!req.body.title) {res.json({err: "Title is empty"}); return}
+      if (options.length <= 1) {res.json({err: "Need more than 1 option"}); return}
+      
       poll.title        = req.body.title;
       poll.description  = req.body.description;
       poll.author       = req.user._id;
       poll.date         = Date.now();
-      
       // Map through options and add it to moogoose
       options.map(function(opt, index){
         Option.create({}, function(err, option){
@@ -59,11 +62,14 @@ router.post('/polls', middleware.isLoggedIn, function(req, res){
             poll.options.push(option);
             
             // If went through the array
-            if (index == options.length-1) {
+            if (poll.options.length == options.length) {
                 poll.save();
-                res.json(poll);
-            };
-          };
+                poll.populate("author").populate("options", function(err, poll) {
+                  if (err) console.log(err);;
+                  res.json(poll);
+                });
+            }
+          }
         });
       });
     };

@@ -3,7 +3,8 @@ import * as types from '../constants/actionTypes';
 
 const DEFAULT_ACTION = {
 	data: [],
-	currentPoll: {}
+	currentPoll: {},
+	myPolls: []
 };
 
 const actionsHandlers = {
@@ -14,6 +15,10 @@ const actionsHandlers = {
 	[types.GET_POLL]: (state, { payload }) =>({
 		...state, 
 		currentPoll: payload
+	}),
+	[types.GET_MY_POLL]: (state, { payload }) =>({
+		...state, 
+		myPolls: payload
 	})
 };
 

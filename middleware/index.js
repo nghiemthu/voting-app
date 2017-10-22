@@ -6,7 +6,7 @@ module.exports = {
       return next();
     }
     
-    res.json({ err: 'You have to log in!'});
+    return res.json({ err: 'You have to log in!'});
   },
   isVoted: function(req, res, next) {
     if (req.isAuthenticated()) {
@@ -20,7 +20,7 @@ module.exports = {
         }
       });
     } else {
-      res.json({ err: 'You have to log in!'});
+      return res.json({ err: 'You have to log in!'});
     }
   }
 }

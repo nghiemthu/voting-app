@@ -11,7 +11,7 @@ class Navigator extends React.Component {
             <Link className="nav-link" to='/'>Home</Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to='/header'>My Polls</Link>
+            <Link className="nav-link" to='/mypolls'>My Polls</Link>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="/logout">{this.props.user.username} 
@@ -22,7 +22,7 @@ class Navigator extends React.Component {
     }
     
     return (
-      <ul className="navbar-nav ml-auto">
+      <ul className="navbar-nav ml-auto"> 
         <li className="nav-item active">
           <Link className="nav-link" to='/'>Home</Link>
         </li>

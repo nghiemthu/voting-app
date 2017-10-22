@@ -1,5 +1,6 @@
 var express     = require("express");
 var router      = express.Router();
+var mongoose    = require('mongoose');
 var Poll        = require("../models/poll");
 var Option      = require("../models/option");
 var middleware  = require("../middleware");
@@ -47,25 +48,27 @@ router.post('/polls/:id/:optionid', middleware.isVoted, function(req, res){
 
 // vote for option with optionid
 router.post('/api/polls/:id', middleware.isVoted, function(req, res){
+  
+  const optionId = (req.body.id == 'newValue' || !req.body.id) ? new mongoose.mongo.ObjectID() : req.body.id;
   Option.findOneAndUpdate(
-    {description: req.body.description}, //find with description
+    {_id: optionId}, //find with description
     {description: req.body.description}, //new option
     { upsert: true, 'new': true }, 
     function(err, option){
     if(err) console.log (err);
     else {
-      Poll.findById(req.params.id, function(err, poll) {
+      Poll.findOne({_id: req.params.id}, function(err, poll) {
         if (err) console.log(err);
         else {
           if (req.user) poll.voters.push(req.user._id);
           option.vote = option.vote+1;
           option.save();
-          console.log(poll.options.indexOf(option._id));
+
           if(poll.options.indexOf(option._id) <= -1){
             poll.options.push(option._id);
           }
           poll.save();
-          res.json(option);
+          res.json(poll);
         }
       });
     }

@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import { Link } from 'react-router-dom';
 
-import { formatDate } from '../lib/date';
+import { formatDate } from '../lib/utils';
 
 class PollList extends React.Component {
   
@@ -32,12 +32,17 @@ class PollList extends React.Component {
   }
   
   renderList = (polls) => {
+    
     if (!polls) {
-      return <div>Loading...</div>;
+      return <div>No Poll</div>;
     }
+    
     return (
       <div>
         {polls.map((this.renderPost()))}
+        <div className="clearfix">
+          <button type="button" className="btn float-right btn-more" href="#">More Polls &rarr;</button>
+        </div>
       </div>
     );
   }
@@ -55,9 +60,6 @@ class PollList extends React.Component {
               </select>
             </div>
             {this.renderList(this.props.polls)}
-            <div className="clearfix">
-              <button type="button" className="btn float-right btn-more" href="#">More Polls &rarr;</button>
-            </div>
           </div>
         </div>
       </div>

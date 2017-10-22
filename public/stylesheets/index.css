@@ -24,6 +24,11 @@ i {
   cursor: pointer;
   color: white; }
 
+.btn-link:hover {
+  color: white;
+  background-color: #199EB8;
+  text-decoration: none; }
+
 .line {
   width: 80px;
   height: 2px;
@@ -110,8 +115,11 @@ i {
   .form-group label {
     font-size: 18px; }
   .form-group input {
-    height: 38px;
+    height: 38px; }
+  .form-group .form-control {
     font-family: "Montserrat", sans-serif; }
+  .form-group .input-danger {
+    border-bottom-color: #ef5350; }
 
 .form-control {
   border: 0 none;
@@ -127,11 +135,69 @@ i {
     font-size: 18px;
     font-weight: 400; }
 
+.danger {
+  color: #ef5350;
+  margin-top: 5px; }
+
 #pie-chart {
   width: 584px;
   height: 292px; }
 
 footer {
   text-align: center; }
+
+.toast-wrap {
+  display: block;
+  position: fixed;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  letter-spacing: normal;
+  z-index: 1000 !important; }
+
+.toast-wrap.top-right {
+  top: 70px;
+  right: 40px; }
+
+.toast-single {
+  position: relative;
+  transition: all 0.3s linear;
+  margin-bottom: 10px; }
+
+.close-toast-single {
+  position: absolute;
+  top: 3px;
+  right: 7px;
+  font-size: 14px;
+  cursor: pointer; }
+
+.toast-content-wrap {
+  display: inline-block;
+  width: 190px; }
+  .toast-content-wrap h2 {
+    padding-top: 15px;
+    font-size: 16px; }
+  .toast-content-wrap p {
+    font-size: 14px; }
+
+.toast-icon-wrap {
+  width: 50px;
+  text-align: center;
+  float: left;
+  font-size: 30px;
+  margin-top: 10%; }
+
+.error {
+  background-color: #ef5350;
+  color: #ffffff; }
+
+.display-none {
+  opacity: 0; }
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
 
 /*# sourceMappingURL=index.css.map */

@@ -5,32 +5,27 @@ import { connect } from 'react-redux';
 import * as Actions from '../actions/index';
 import Header from './Header';
 import Navigator from './Navigator';
-import PollList from './PollList';
+import NewForm from './NewForm';
 import Footer from './Footer';
 
-class App extends React.Component {
-  
-  componentDidMount = () => {
-    this.props.actions.fetchPolls();
-    this.props.actions.fetchUser();
-  }
-  
+class NewView extends React.Component {
   render() {
+    const { user } = this.props;
     return (
-      <div className="App">
-        <Navigator user={this.props.user} />
+      <div className="PollView">
+        <Navigator user={user} />
         <Header 
-          description={'A voting system for you and your friends!'}
-          button={'New Poll'}    
+          title={'New Poll'}
+          description={'Create a new poll!'}
         />
-        <PollList polls={this.props.polls.data} />
+        <NewForm />
         <Footer />
       </div>
     );
   }
 }
 
-App.propTypes = {
+NewView.propTypes = {
   actions: PropTypes.object.isRequired
 };
 
@@ -39,6 +34,4 @@ export default connect(
   (state) => ({ ...state }),
   // map dispatch to props,
   (dispatch) => ({ actions: bindActionCreators(Actions, dispatch) })
-)(App);
-
-
+)(NewView);

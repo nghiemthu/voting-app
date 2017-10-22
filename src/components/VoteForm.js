@@ -1,15 +1,17 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
 import * as Actions from '../actions/index';
-import Chart from './Chart';
 
 class VoteForm extends React.Component {
-  
+  static contextTypes = {
+    router: PropTypes.object
+  }
+
   state = {
     value: '',
-    newValue: ''
+    newValue: '',
+    newValueValidation: ''
   }
   
   handleChange = (event) => {
@@ -17,34 +19,42 @@ class VoteForm extends React.Component {
   }
   
   handleInputChange = (event) => {
-    this.setState({newValue: event.target.value});
+    this.setState({
+      newValue: event.target.value
+    });
   }
   
   handleSubmit = (event) => {
-    if (!this.state.value) { alert('No selection'); return }
-    if (this.state.value !== 'New Option') { 
-      alert('Your vote is: ' + this.state.value); 
-      this.props.actions.voteOption(this.props.id, this.state.value);
+    const chosenOption = this.props.options.filter((option) => option._id == this.state.value);
+    const { value, newValue } = this.state;
+    const id = this.props.polls.currentPoll._id;
+    
+    if (!value) { alert('No selection'); return }
+    if (value !== 'New Option') { 
+      this.props.actions.voteOption(id, value, chosenOption[0].description);
       return; 
     }
-    if (!this.state.newValue) { 
-      alert('No selection'); 
+    if (!newValue) { 
+      this.setState({newValueValidation: 'New value required'});
       return;
+    } else {
+      this.setState({newValueValidation: ''});
     }
-    alert('Your vote is: ' + this.state.newValue);
-    this.props.actions.voteOption(this.props.id, this.state.newValue);
+
+    this.props.actions.voteOption(id, 'newValue', newValue);
+    this.props.actions.fetchPoll(id);
     event.preventDefault();
   }
 
-  renderOptions = (options) => {
+  renderOptions = () => {
     return (
       <select 
         className="form-control custom-select"
         value={this.state.value} onChange={this.handleChange}
       >
         <option defaultValue='' value='' disabled>Choose an option</option>
-        {options.map((option) => {
-          return <option key={option._id} value={option.description}>
+        {this.props.options.map((option) => {
+          return <option key={option._id} value={option._id}>
             {option.description}
           </option>;
         })}
@@ -60,11 +70,12 @@ class VoteForm extends React.Component {
        <div className="form-group">
           <input 
             type="text" 
-            className="form-control" 
+            className={(this.state.newValueValidation) ? 'form-control input-danger' : 'form-control'}
             placeholder="Custom Option" 
             value={this.state.newValue}
             onChange={this.handleInputChange} 
           /> 
+          <span className='danger'>{this.state.newValueValidation}</span>
         </div>
     );
   }
@@ -76,7 +87,7 @@ class VoteForm extends React.Component {
           <div className="col-lg-8 col-md-10 mx-auto">
             <div className="form-group">
               <label>I'd like to vote for...:</label>
-              {(this.props.options) ? this.renderOptions(this.props.options) : null}
+              {(this.props.options) ? this.renderOptions() : null}
             </div>
             {this.renderNewInput()}
             <div className="clearfix">
@@ -87,7 +98,6 @@ class VoteForm extends React.Component {
                 onClick={this.handleSubmit}
               >Submit &rarr;</button>
             </div>
-            <Chart />
           </div>
         </div>
       </div>
