@@ -60,7 +60,7 @@ class Header extends React.Component {
           <div className="row">
             <div className="col-lg-8 col-md-10 mx-auto">
               <div className="heading-content">
-                <h1>{this.props.title || 'VotApp'}</h1>
+                <h1>{this.props.title || 'VotApp!'}</h1>
                 <div className="line"></div>
                 <span className="subheading">{this.props.description || 'Share your thought!'}</span>
                 <br/>
